@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<!-- angular js, bootstrap css and angular control imports -->
+	<script src="angular.min.js"></script>
+	<script src="controller.js"></script>
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Below ng-controller todoListCtrl is defined in controller.js -->
+	<body ng-controller="todoListCtrl">
+		<!-- container class to align the page -->
+		<div class="container">
+			<div class="page-header" align="center"> <h1> AngularJS Add/Remove </h1> 
+			</div></br>
+			<!-- Form to add the values -->
+			<form class="form-horizontal" ng-submit="addRow()">
+					<div class="form-group">
+						<div class="row">
+							<label class="col-md-2 control-label">Enter Todo item</label>
+							<div class="col-md-2">
+								<input type="text" class="form-control ng-pristine ng-valid" name="itemName" ng-model="itemName">
+							</div>
+							<div class="col-md-8">
+								<input type="button" value="Add" ng-click="addRow()" class="btn btn-primary">
+							</div>
+						</div>
+				</div>
+			</form>
+			
+			<!-- Table to display the list of values-->
+			<table class="table">
+				<tr>
+					<th> Item No.</th>
+					<th>To Do item(s) </th>
+					<th>Select Item to remove <input type="checkbox" ng-model="master" ng-change="isSelectAll()"> </th>
+					<th><input type="button" value="Remove selected" ng-click="removeSelectedRows()" class="btn btn-primary"> </th>
+				</tr>
+				<tr ng-repeat="item in itemList">
+					<td> {{$index+1}}</td> <!--index to display the order numbers -->
+					<td> {{item.itemName}} </td>
+					<td colspan="2"> <input type="checkbox" ng-model="item.selected" ng-change="isLabelChecked()">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
